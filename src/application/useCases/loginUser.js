@@ -3,10 +3,11 @@ import jwt from 'jsonwebtoken';
 
 export const loginUser = async ({ email, password }, userRepository) => {
     const user = await userRepository.findByEmail(email);
-  if (!user) throw new Error('Email tidak ditemukan');
+  if (!user) throw new Error('Email not found');
+  if (!user.passwordHash) throw new Error('User not registered');
 
   const valid = await argon2.verify(user.passwordHash, password);
-  if (!valid) throw new Error('Password salah');
+  if (!valid) throw new Error('Invalid password');
 
   const token = jwt.sign({ id: user.id, email: user.email }, 'SECRET', { expiresIn: '1h' });
 
