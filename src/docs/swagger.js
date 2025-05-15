@@ -120,45 +120,70 @@ export const swaggerSpec = {
           }
         },
         responses: {
-          201: {
-            description: 'Book added successfully'
-          },
-          400: {
-            description: 'Error adding book'
-          },
-          401: {
-            description: 'Unauthorized – token missing or invalid'
-          }
+          201: { description: 'Book added successfully' },
+          400: { description: 'Error adding book' },
+          401: { description: 'Unauthorized – token missing or invalid' }
         }
       },
       get: {
-        summary: 'Get all books owned by the current user',
+        summary: 'Get all books with pagination',
+        description: 'Returns a paginated list of books. Use query parameters `page` and `limit`.',
         security: [{ bearerAuth: [] }],
+        parameters: [
+          {
+            name: 'page',
+            in: 'query',
+            description: 'Page number',
+            required: false,
+            schema: { type: 'integer', default: 1 }
+          },
+          {
+            name: 'limit',
+            in: 'query',
+            description: 'Number of items per page',
+            required: false,
+            schema: { type: 'integer', default: 10 }
+          }
+        ],
         responses: {
           200: {
-            description: "List of user's books",
+            description: 'List of books with pagination',
             content: {
               'application/json': {
                 schema: {
-                  type: 'array',
-                  items: {
-                    type: 'object',
-                    properties: {
-                      _id: { type: 'string' },
-                      title: { type: 'string' },
-                      author: { type: 'string' },
-                      userId: { type: 'string' },
-                      createdAt: { type: 'string', format: 'date-time' },
-                      updatedAt: { type: 'string', format: 'date-time' }
+                  type: 'object',
+                  properties: {
+                    code: { type: 'integer' },
+                    message: { type: 'string' },
+                    data: {
+                      type: 'array',
+                      items: {
+                        type: 'object',
+                        properties: {
+                          id: { type: 'string' },
+                          title: { type: 'string' },
+                          author: { type: 'string' },
+                          userId: { type: 'string' },
+                          createdAt: { type: 'string', format: 'date-time' },
+                          updatedAt: { type: 'string', format: 'date-time' }
+                        }
+                      }
+                    },
+                    pagination: {
+                      type: 'object',
+                      properties: {
+                        total: { type: 'integer' },
+                        page: { type: 'integer' },
+                        perPage: { type: 'integer' },
+                        totalPages: { type: 'integer' }
+                      }
                     }
                   }
                 }
               }
             }
           },
-          401: {
-            description: 'Unauthorized – token missing or invalid'
-          }
+          401: { description: 'Unauthorized – token missing or invalid' }
         }
       }
     },
