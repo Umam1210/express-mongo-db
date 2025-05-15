@@ -1,5 +1,6 @@
 import { addBook } from '../../application/useCases/book/addBook.js';
 import { deleteBook } from '../../application/useCases/book/deleteBook.js';
+import { listBooksPaginated } from '../../application/useCases/book/listBooksPaginated.js';
 import { updateBook } from '../../application/useCases/book/updateBook.js';
 
 export const createBookController = (bookRepo) => {
@@ -108,24 +109,26 @@ export const createBookController = (bookRepo) => {
 
   const getAllBooks = async (req, res) => {
     try {
-      const books = await bookRepo.findAll();
-
+      const page = parseInt(req.query.page) || 1;
+      const limit = parseInt(req.query.limit) || 10;
+  
+      const result = await listBooksPaginated(page, limit, bookRepo);
+  
       return res.status(200).json({
         code: 200,
         message: 'Books retrieved successfully',
-        data: books,
-        pagination: null
+        data: result.data,
+        pagination: result.pagination,
       });
-
     } catch (error) {
       return res.status(500).json({
         code: 500,
         message: error.message,
         data: null,
-        pagination: null
+        pagination: null,
       });
     }
-  }
+  };
 
 
   const updateBookHandler = async (req, res) => {

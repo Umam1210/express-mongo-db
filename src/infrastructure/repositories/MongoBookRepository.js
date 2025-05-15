@@ -78,5 +78,36 @@ export const createMongoBookRepository = () => ({
   deleteById: async (id) => {
     await BookModel.findByIdAndDelete(id);
     return true;
+  },
+
+  findAllPaginated: async (page = 1, limit = 10) => {
+    const skip = (page - 1) * limit;
+    const [docs, total] = await Promise.all([
+      BookModel.find().skip(skip).limit(limit),
+      BookModel.countDocuments()
+    ]);
+  
+    const books = docs.map(doc =>
+      createBookEntity({
+        id: doc._id.toString(),
+        title: doc.title,
+        author: doc.author,
+        userId: doc.userId.toString(),
+        createdAt: doc.createdAt,
+        updatedAt: doc.updatedAt
+      })
+    );
+  
+    return {
+      data: books,
+      pagination: {
+        total,
+        page,
+        perPage: limit,
+        totalPages: Math.ceil(total / limit)
+      }
+    };
   }
+  
+
 });
