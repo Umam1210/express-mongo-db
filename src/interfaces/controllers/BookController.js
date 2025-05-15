@@ -155,11 +155,42 @@ export const createBookController = (bookRepo) => {
     }
   };
 
+  const getBookById = async (req, res) => {
+    try {
+      const bookId = req.params.id;
+      const book = await bookRepo.findById(bookId);
+
+      if (!book) {
+        return res.status(404).json({
+          code: 404,
+          message: 'Book not found',
+          data: null,
+          pagination: null
+        });
+      }
+
+      return res.status(200).json({
+        code: 200,
+        message: 'Book retrieved successfully',
+        data: book,
+        pagination: null
+      });
+    } catch (error) {
+      return res.status(500).json({
+        code: 500,
+        message: error.message,
+        data: null,
+        pagination: null
+      });
+    }
+  };
+
   return {
     addBook: addBookHandler,
     findBookByUserLogin: findAllBook,
     deleteBookById: deleteBookHandler,
     getAllBooks: getAllBooks,
-    updateBook: updateBookHandler
+    updateBook: updateBookHandler,
+    getBookById: getBookById
   };
 };

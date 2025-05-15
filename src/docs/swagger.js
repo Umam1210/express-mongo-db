@@ -304,7 +304,6 @@ export const swaggerSpec = {
           }
         }
       },
-
       delete: {
         summary: 'Delete a book',
         description: 'Delete a book by its ID. Only the owner can delete it.',
@@ -330,6 +329,24 @@ export const swaggerSpec = {
           404: {
             description: 'Book not found'
           }
+        }
+      },
+      get: {
+        summary: 'Get book by ID',
+        description: 'Get a specific book by its ID',
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: { type: 'string' }
+          }
+        ],
+        responses: {
+          200: { description: 'Book found' },
+          404: { description: 'Book not found' },
+          401: { description: 'Unauthorized' }
         }
       }
     }

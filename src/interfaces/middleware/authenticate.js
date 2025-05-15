@@ -6,7 +6,7 @@ export const authenticate = (req, res, next) => {
   if (!authHeader || !authHeader.startsWith('Bearer ')) {
     return res.status(401).json({
       code: 401,
-      message: 'Token tidak ditemukan',
+      message: 'Token not found',
       data: null,
       pagination: null
     });
@@ -21,7 +21,7 @@ export const authenticate = (req, res, next) => {
   } catch (error) {
     return res.status(401).json({
       code: 401,
-      message: 'Token tidak valid',
+      message: 'Token invalid',
       data: null,
       pagination: null
     });

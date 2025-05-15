@@ -14,6 +14,7 @@ router.get('/', authenticate, bookController.findBookByUserLogin);
 router.delete('/:id', authenticate, bookController.deleteBookById);
 router.get('/list', bookController.getAllBooks);
 router.put('/:id', authenticate, bookController.updateBook);
+router.get('/:id', authenticate, bookController.getBookById);
 
 // (Opsional untuk nanti)
 // router.get('/', authenticate, bookController.getBooks);
