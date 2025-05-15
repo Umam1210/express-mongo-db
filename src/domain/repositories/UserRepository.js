@@ -1,8 +1,5 @@
 export const createUserRepository = () => ({
-    findByEmail: async (email) => {
-        return null; 
-    },
-    save: async (user) => {
-        return user;
-    }
-})
+    findByEmail: async (email) => null,
+    save: async (user) => user,
+  });
+  

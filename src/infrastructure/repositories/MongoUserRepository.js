@@ -1,24 +1,5 @@
-import mongoose from "mongoose";
-import { createUserEntity } from "../../domain/entities/User.js";
-
-const userSchema = new mongoose.Schema({
-    name: String,
-    email: {
-        type: String,
-        unique: true,
-    },
-    passwordHash: String,
-    createdAt: {
-        type: Date,
-        default: Date.now,
-    },
-    updatedAt: {
-        type: Date,
-        default: Date.now,
-    },
-});
-
-const UserModel = mongoose.model("User", userSchema);
+import { UserModel } from "../../domain/model/UserModel.js";
+import { createUserEntity } from '../../domain/entities/User.js'
 
 export const createMongoUserRepository = () => ({
     findByEmail: async (email) => {

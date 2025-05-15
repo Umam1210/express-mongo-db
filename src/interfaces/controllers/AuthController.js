@@ -1,5 +1,5 @@
-import { loginUser } from "../../application/useCases/loginUser.js";
-import { registerUser } from "../../application/useCases/registerUser.js";
+import { loginUser } from "../../application/useCases/user/loginUser.js";
+import { registerUser } from "../../application/useCases/user/registerUser.js";
 
 export const createAuthController = (userRepo) => {
   const register = async (req, res) => {

@@ -1,4 +1,4 @@
-import { createUserEntity } from '../../domain/entities/User.js';
+import { createUserEntity } from '../../../domain/entities/User.js';
 import  argon2 from 'argon2';
 
 export const registerUser = async ({ name, email, password }, userRepository) => { 
