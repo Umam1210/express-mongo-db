@@ -1,4 +1,3 @@
-
 import { setupApp } from './src/app/setupApp.js';
 import connectToMongo from './src/config/mongo.js';
 import { createMongoUserRepository } from './src/infrastructure/repositories/MongoUserRepository.js';

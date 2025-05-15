@@ -3,12 +3,12 @@ export const swaggerSpec = {
   info: {
     title: 'Express mongoose',
     version: '1.0.0',
-    description: 'express mongoose api',
+    description: 'express mongoose api'
   },
   servers: [
     {
-      url: 'http://localhost:3000',
-    },
+      url: 'http://localhost:3000'
+    }
   ],
   paths: {
     '/auth/register': {
@@ -23,22 +23,22 @@ export const swaggerSpec = {
                 properties: {
                   name: { type: 'string' },
                   email: { type: 'string' },
-                  password: { type: 'string' },
+                  password: { type: 'string' }
                 },
-                required: ['name', 'email', 'password'],
-              },
-            },
-          },
+                required: ['name', 'email', 'password']
+              }
+            }
+          }
         },
         responses: {
           201: {
-            description: 'User registered successfully',
+            description: 'User registered successfully'
           },
           400: {
-            description: 'Error registering user',
-          },
-        },
-      },
+            description: 'Error registering user'
+          }
+        }
+      }
     },
     '/auth/login': {
       post: {
@@ -51,22 +51,22 @@ export const swaggerSpec = {
                 type: 'object',
                 properties: {
                   email: { type: 'string' },
-                  password: { type: 'string' },
+                  password: { type: 'string' }
                 },
-                required: ['email', 'password'],
-              },
-            },
-          },
+                required: ['email', 'password']
+              }
+            }
+          }
         },
         responses: {
           200: {
-            description: 'Login success',
+            description: 'Login success'
           },
           400: {
-            description: 'Invalid login',
-          },
-        },
-      },
+            description: 'Invalid login'
+          }
+        }
+      }
     },
     '/books': {
       post: {
@@ -80,91 +80,92 @@ export const swaggerSpec = {
                 type: 'object',
                 properties: {
                   title: { type: 'string' },
-                  author: { type: 'string' },
+                  author: { type: 'string' }
                 },
-                required: ['title', 'author'],
-              },
-            },
-          },
-        },
-        responses: {
-          201: {
-            description: 'Book added successfully',
-          },
-          400: {
-            description: 'Error adding book',
-          },
-          401: {
-            description: 'Unauthorized – token missing or invalid',
-          },
-        },
-      },
-    },
-    '/books/list': {
-  post: {
-    summary: 'Add a new book',
-    security: [{ bearerAuth: [] }],
-    requestBody: {
-      required: true,
-      content: {
-        'application/json': {
-          schema: {
-            type: 'object',
-            properties: {
-              title: { type: 'string' },
-              author: { type: 'string' },
-            },
-            required: ['title', 'author'],
-          },
-        },
-      },
-    },
-    responses: {
-      201: {
-        description: 'Book added successfully',
-      },
-      400: {
-        description: 'Error adding book',
-      },
-      401: {
-        description: 'Unauthorized – token missing or invalid',
-      },
-    },
-  },
-  get: {
-    summary: 'Get all books owned by the current user',
-    security: [{ bearerAuth: [] }],
-    responses: {
-      200: {
-        description: 'List of user\'s books',
-        content: {
-          'application/json': {
-            schema: {
-              type: 'array',
-              items: {
-                type: 'object',
-                properties: {
-                  _id: { type: 'string' },
-                  title: { type: 'string' },
-                  author: { type: 'string' },
-                  userId: { type: 'string' },
-                  createdAt: { type: 'string', format: 'date-time' },
-                  updatedAt: { type: 'string', format: 'date-time' }
-                }
+                required: ['title', 'author']
               }
             }
           }
+        },
+        responses: {
+          201: {
+            description: 'Book added successfully'
+          },
+          400: {
+            description: 'Error adding book'
+          },
+          401: {
+            description: 'Unauthorized – token missing or invalid'
+          }
+        }
+      }
+    },
+    '/books/list': {
+      post: {
+        summary: 'Add a new book',
+        security: [{ bearerAuth: [] }],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  title: { type: 'string' },
+                  author: { type: 'string' }
+                },
+                required: ['title', 'author']
+              }
+            }
+          }
+        },
+        responses: {
+          201: {
+            description: 'Book added successfully'
+          },
+          400: {
+            description: 'Error adding book'
+          },
+          401: {
+            description: 'Unauthorized – token missing or invalid'
+          }
         }
       },
-      401: {
-        description: 'Unauthorized – token missing or invalid'
+      get: {
+        summary: 'Get all books owned by the current user',
+        security: [{ bearerAuth: [] }],
+        responses: {
+          200: {
+            description: "List of user's books",
+            content: {
+              'application/json': {
+                schema: {
+                  type: 'array',
+                  items: {
+                    type: 'object',
+                    properties: {
+                      _id: { type: 'string' },
+                      title: { type: 'string' },
+                      author: { type: 'string' },
+                      userId: { type: 'string' },
+                      createdAt: { type: 'string', format: 'date-time' },
+                      updatedAt: { type: 'string', format: 'date-time' }
+                    }
+                  }
+                }
+              }
+            }
+          },
+          401: {
+            description: 'Unauthorized – token missing or invalid'
+          }
+        }
       }
-    }
-  }
     },
     get: {
       summary: 'Get all books with pagination',
-      description: 'Returns a paginated list of books. Use query parameters `page` and `limit` to control pagination.',
+      description:
+        'Returns a paginated list of books. Use query parameters `page` and `limit` to control pagination.',
       security: [{ bearerAuth: [] }],
       parameters: [
         {
@@ -232,90 +233,89 @@ export const swaggerSpec = {
       }
     },
     '/books/{id}': {
-  patch: {
-    summary: 'Update a book',
-    description: 'Update the title or author of a book by its ID. Only the owner can update it.',
-    security: [{ bearerAuth: [] }],
-    parameters: [
-      {
-        name: 'id',
-        in: 'path',
-        required: true,
-        schema: {
-          type: 'string'
-        },
-        description: 'ID of the book to update'
-      }
-    ],
-    requestBody: {
-      required: true,
-      content: {
-        'application/json': {
-          schema: {
-            type: 'object',
-            properties: {
-              title: { type: 'string' },
-              author: { type: 'string' }
+      patch: {
+        summary: 'Update a book',
+        description:
+          'Update the title or author of a book by its ID. Only the owner can update it.',
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: {
+              type: 'string'
             },
-            required: []
+            description: 'ID of the book to update'
+          }
+        ],
+        requestBody: {
+          required: true,
+          content: {
+            'application/json': {
+              schema: {
+                type: 'object',
+                properties: {
+                  title: { type: 'string' },
+                  author: { type: 'string' }
+                },
+                required: []
+              }
+            }
+          }
+        },
+        responses: {
+          200: {
+            description: 'Book updated successfully'
+          },
+          400: {
+            description: 'Validation or update error'
+          },
+          401: {
+            description: 'Unauthorized – token missing or invalid'
+          },
+          404: {
+            description: 'Book not found'
+          }
+        }
+      },
+
+      delete: {
+        summary: 'Delete a book',
+        description: 'Delete a book by its ID. Only the owner can delete it.',
+        security: [{ bearerAuth: [] }],
+        parameters: [
+          {
+            name: 'id',
+            in: 'path',
+            required: true,
+            schema: {
+              type: 'string'
+            },
+            description: 'ID of the book to delete'
+          }
+        ],
+        responses: {
+          200: {
+            description: 'Book deleted successfully'
+          },
+          401: {
+            description: 'Unauthorized – token missing or invalid'
+          },
+          404: {
+            description: 'Book not found'
           }
         }
       }
-    },
-    responses: {
-      200: {
-        description: 'Book updated successfully'
-      },
-      400: {
-        description: 'Validation or update error'
-      },
-      401: {
-        description: 'Unauthorized – token missing or invalid'
-      },
-      404: {
-        description: 'Book not found'
-      }
     }
-  },
-
-  delete: {
-    summary: 'Delete a book',
-    description: 'Delete a book by its ID. Only the owner can delete it.',
-    security: [{ bearerAuth: [] }],
-    parameters: [
-      {
-        name: 'id',
-        in: 'path',
-        required: true,
-        schema: {
-          type: 'string'
-        },
-        description: 'ID of the book to delete'
-      }
-    ],
-    responses: {
-      200: {
-        description: 'Book deleted successfully'
-      },
-      401: {
-        description: 'Unauthorized – token missing or invalid'
-      },
-      404: {
-        description: 'Book not found'
-      }
-    }
-  }
-}
-
-    
   },
   components: {
     securitySchemes: {
       bearerAuth: {
         type: 'http',
         scheme: 'bearer',
-        bearerFormat: 'JWT',
-      },
-    },
-  },
+        bearerFormat: 'JWT'
+      }
+    }
+  }
 };

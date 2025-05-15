@@ -1,8 +1,8 @@
-import  argon2 from 'argon2';
+import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 
 export const loginUser = async ({ email, password }, userRepository) => {
-    const user = await userRepository.findByEmail(email);
+  const user = await userRepository.findByEmail(email);
   if (!user) throw new Error('Email not found');
   if (!user.passwordHash) throw new Error('User not registered');
 
@@ -13,5 +13,4 @@ export const loginUser = async ({ email, password }, userRepository) => {
 
   const { passwordHash, ...userSafe } = user;
   return { token, user: userSafe };
-
-}
+};

@@ -26,7 +26,6 @@ export const createBookController = (bookRepo) => {
         data: book,
         pagination: null
       });
-
     } catch (error) {
       return res.status(400).json({
         code: 400,
@@ -37,11 +36,10 @@ export const createBookController = (bookRepo) => {
     }
   };
 
-
   const findAllBook = async (req, res) => {
     try {
       const userId = req.user?.id;
-  
+
       if (!userId) {
         return res.status(401).json({
           code: 401,
@@ -50,16 +48,15 @@ export const createBookController = (bookRepo) => {
           pagination: null
         });
       }
-  
+
       const books = await bookRepo.findByUserId(userId);
-  
+
       return res.status(200).json({
         code: 200,
         message: 'Books retrieved successfully',
         data: books,
         pagination: null
       });
-  
     } catch (error) {
       return res.status(500).json({
         code: 500,
@@ -70,10 +67,9 @@ export const createBookController = (bookRepo) => {
     }
   };
 
-
   const deleteBookHandler = async (req, res) => {
     try {
-      const bookId = req.params.id
+      const bookId = req.params.id;
       const userId = req.user?.id;
 
       if (!userId) {
@@ -93,43 +89,38 @@ export const createBookController = (bookRepo) => {
         data: null,
         pagination: null
       });
-
     } catch (error) {
       return res.status(400).json({
         code: 400,
-        message: error.message ,
+        message: error.message,
         data: null,
         pagination: null
       });
-
-      
     }
-  }
-
+  };
 
   const getAllBooks = async (req, res) => {
     try {
       const page = parseInt(req.query.page) || 1;
       const limit = parseInt(req.query.limit) || 10;
-  
+
       const result = await listBooksPaginated(page, limit, bookRepo);
-  
+
       return res.status(200).json({
         code: 200,
         message: 'Books retrieved successfully',
         data: result.data,
-        pagination: result.pagination,
+        pagination: result.pagination
       });
     } catch (error) {
       return res.status(500).json({
         code: 500,
         message: error.message,
         data: null,
-        pagination: null,
+        pagination: null
       });
     }
   };
-
 
   const updateBookHandler = async (req, res) => {
     try {
@@ -154,7 +145,6 @@ export const createBookController = (bookRepo) => {
         data: updatedBook,
         pagination: null
       });
-
     } catch (error) {
       return res.status(400).json({
         code: 400,
@@ -164,7 +154,6 @@ export const createBookController = (bookRepo) => {
       });
     }
   };
-  
 
   return {
     addBook: addBookHandler,

@@ -1,7 +1,7 @@
 import express from 'express';
 import { registerRoutes } from './routes/index.js';
 import swaggerUi from 'swagger-ui-express';
-import {swaggerSpec} from '../docs/swagger.js'
+import { swaggerSpec } from '../docs/swagger.js';
 
 export const setupApp = (controllers) => {
   const app = express();
