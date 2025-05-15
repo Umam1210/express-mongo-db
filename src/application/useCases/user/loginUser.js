@@ -1,7 +1,16 @@
 import argon2 from 'argon2';
 import jwt from 'jsonwebtoken';
 
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
 export const loginUser = async ({ email, password }, userRepository) => {
+  if (!isValidEmail(email)) {
+    throw new Error('Invalid email format');
+  }
+
   const user = await userRepository.findByEmail(email);
   if (!user) throw new Error('Email not found');
   if (!user.passwordHash) throw new Error('User not registered');
