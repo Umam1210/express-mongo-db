@@ -11,6 +11,10 @@ const bookController = createBookController(bookRepo);
 // Tambah buku baru
 router.post('/', authenticate, bookController.addBook);
 router.get("/", authenticate, bookController.findBookByUserLogin)
+router.delete("/:id", authenticate, bookController.deleteBookById)
+router.get('/list', bookController.getAllBooks);
+router.put('/:id', authenticate, bookController.updateBook);
+
 
 // (Opsional untuk nanti)
 // router.get('/', authenticate, bookController.getBooks);

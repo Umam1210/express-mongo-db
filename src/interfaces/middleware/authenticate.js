@@ -15,7 +15,7 @@ export const authenticate = (req, res, next) => {
   const token = authHeader.split(' ')[1];
 
   try {
-    const decoded = jwt.verify(token, 'SECRET'); // ganti 'SECRET' dengan env var nanti
+    const decoded = jwt.verify(token, 'SECRET'); // ganti 'SECRET' dengan env var
     req.user = decoded;
     next();
   } catch (error) {

@@ -11,19 +11,13 @@ const bookSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  userId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'User',
-    required: true
-  },
-  createdAt: {
-    type: Date,
-    default: () => new Date()
-  },
-  updatedAt: {
-    type: Date,
-    default: () => new Date()
-  }
-});
+    userId: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'User',
+      required: true
+    }
+  }, {
+    timestamps: true 
+  });
 
 export const BookModel = mongoose.model('Book', bookSchema);

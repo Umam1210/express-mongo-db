@@ -1,9 +1,10 @@
-export const createBookEntity = ({ title, author, userId }) => {
+export const createBookEntity = ({id, title, author, userId }) => {
     if (!title || !author || !userId) {
       throw new Error('Missing required book fields');
     }
   
-    return {
+  return {
+      id,
       title,
       author,
       userId,

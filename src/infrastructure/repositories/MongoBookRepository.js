@@ -56,17 +56,24 @@ export const createMongoBookRepository = () => ({
   },
 
   updateById: async (id, updateData) => {
-    updateData.updatedAt = new Date();
-    const doc = await BookModel.findByIdAndUpdate(id, updateData, { new: true });
-    return doc ? createBookEntity({
+    const doc = await BookModel.findById(id);
+    if (!doc) return null;
+  
+    doc.title = updateData.title;
+    doc.author = updateData.author;
+    doc.updatedAt = new Date(); 
+    await doc.save();
+  
+    return createBookEntity({
       id: doc._id.toString(),
       title: doc.title,
       author: doc.author,
       userId: doc.userId.toString(),
       createdAt: doc.createdAt,
-      updatedAt: doc.updatedAt
-    }) : null;
+      updatedAt: doc.updatedAt,
+    });
   },
+  
 
   deleteById: async (id) => {
     await BookModel.findByIdAndDelete(id);
