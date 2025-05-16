@@ -2,27 +2,12 @@
 
 Sebuah aplikasi API sederhana berbasis Express dan MongoDB untuk sistem **perpustakaan**, di mana user dapat mendaftar, login, dan mengelola koleksi bukunya sendiri.
 
----
-
-## 🚀 Fitur Utama
-
-- ✅ Register & Login dengan token JWT
-- ✅ Menambahkan buku
-- ✅ Melihat semua buku
-- ✅ Melihat detail buku
-- ✅ Mengupdate & menghapus buku milik sendiri
-- ✅ Swagger UI untuk dokumentasi API
-- ✅ Unit Test dengan Jest + Supertest
-- ✅ Struktur kode mengikuti Domain-Driven Design (DDD)
-
----
-
 ## 📦 Instalasi
 
 1. **Clone repositori**
 
 ```bash
-git clone <link_repo_anda>
+git clone https://github.com/Umam1210/express-mongo-db.git
 cd express
 ```
 
@@ -37,13 +22,6 @@ npm install
 
 ```bash
 sudo systemctl start mongod
-```
-
-4. **Buat file `.env` (jika dibutuhkan)**
-
-```env
-PORT=3000
-JWT_SECRET=SECRET
 ```
 
 ---
@@ -64,29 +42,6 @@ Swagger tersedia di:
 
 ```
 http://localhost:3000/api-docs
-```
-
----
-
-## 🗂️ Struktur Folder
-
-```
-src/
-├── application/
-│   └── useCases/
-├── config/
-├── domain/
-│   ├── entities/
-│   └── models/
-├── infrastructure/
-│   └── repositories/
-├── interfaces/
-│   ├── controllers/
-│   ├── middlewares/
-│   └── routes/
-├── app/
-│   └── setupApp.js
-tests/
 ```
 
 ---
@@ -125,13 +80,3 @@ Body: {
 Gunakan token dari login sebagai Bearer Token di endpoint lain.
 
 ---
-
-## 👨‍💻 Kontribusi
-
-Silakan fork, pull request, atau diskusi jika ingin berkontribusi.
-
----
-
-## 📄 Lisensi
-
-MIT © 2025
